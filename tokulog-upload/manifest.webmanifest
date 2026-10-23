@@ -1,0 +1,23 @@
+{
+  "name": "トクログ",
+  "short_name": "トクログ",
+  "description": "テキストで出力した昔のLINEのトーク履歴を、今のLINEのように見返せるビューア。中身は端末の外に送信されません。",
+  "lang": "ja",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#14181e",
+  "theme_color": "#2c3956",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
