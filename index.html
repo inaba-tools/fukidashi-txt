@@ -4,8 +4,30 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}body{margin:0;font-size:14px}[hidden]{display:none!important}</style>
-<title>トクログ</title>
-<meta name="description" content="LINEのトーク履歴(.txt)をLINE風に見返せるビューア。端末内だけで表示し、内容は一切送信されません。">
+<title>ふきだしtxt｜昔のLINEのトーク履歴を今のLINEのように見返せる</title>
+<meta name="description" content="テキストで出力した昔のLINEのトーク履歴を、今のLINEのように見返せるビューア。読み込むだけで吹き出し画面に。検索・日付ジャンプ、長いやりとりを1枚の画像にするスクショ機能つき。中身は端末の外に一切送信されません。">
+<link rel="canonical" href="https://pipopa-lab.github.io/fukidashi-txt/">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ふきだしtxt">
+<meta property="og:title" content="ふきだしtxt｜昔のLINEのトーク履歴を今のLINEのように見返せる">
+<meta property="og:description" content="テキストで出力した昔のLINEのトーク履歴を、今のLINEのように見返せるビューア。読み込むだけで吹き出し画面に。検索・日付ジャンプ、長いやりとりを1枚の画像にするスクショ機能つき。中身は端末の外に一切送信されません。">
+<meta property="og:url" content="https://pipopa-lab.github.io/fukidashi-txt/">
+<meta property="og:image" content="https://pipopa-lab.github.io/fukidashi-txt/ogp.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ふきだしtxt｜昔のLINEのトーク履歴を今のLINEのように見返せる">
+<meta name="twitter:description" content="テキストで出力した昔のLINEのトーク履歴を、今のLINEのように見返せるビューア。読み込むだけで吹き出し画面に。検索・日付ジャンプ、長いやりとりを1枚の画像にするスクショ機能つき。中身は端末の外に一切送信されません。">
+<meta name="twitter:image" content="https://pipopa-lab.github.io/fukidashi-txt/ogp.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ふきだしtxt">
+<meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14181e" media="(prefers-color-scheme: dark)">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"ふきだしtxt","alternateName":["ふきだしテキスト","fukidashi-txt"],"url":"https://pipopa-lab.github.io/fukidashi-txt/","applicationCategory":"UtilitiesApplication","operatingSystem":"iOS, Android, Windows, macOS","inLanguage":"ja","description":"テキストで出力した昔のLINEのトーク履歴を、今のLINEのように見返せるビューア。読み込むだけで吹き出し画面に。検索・日付ジャンプ、長いやりとりを1枚の画像にするスクショ機能つき。中身は端末の外に一切送信されません。","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&display=swap">
@@ -150,6 +172,7 @@ body.selecting .msg,body.selecting .sys{cursor:pointer}
 .shot-foot{display:flex;flex-direction:column;gap:8px;align-items:stretch;border-top:1px solid var(--line);
   padding-block:12px calc(14px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .shot-foot .fine{text-align:center}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .drop{position:absolute;inset:12px;z-index:30;border:3px dashed var(--accent);border-radius:20px;background:color-mix(in srgb,var(--sheet) 88%,transparent);
   display:grid;place-items:center;font-family:var(--f-display);font-size:20px;font-weight:700;color:var(--accent);pointer-events:none}
 .toast{position:absolute;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:40;background:var(--bar-fg);color:var(--bar);
@@ -159,6 +182,11 @@ body.selecting .msg,body.selecting .sys{cursor:pointer}
 
 </head>
 <body>
+<section class="sr" aria-label="ふきだしtxtについて">
+  <h2>ふきだしtxt：テキストで出力した昔のLINEのトーク履歴を、今のLINEのように見返せる</h2>
+  <p>LINEの「トーク履歴を送信」で保存したテキストファイル(.txt)を読み込むと、今のLINEのトーク画面のような吹き出しで見返せます。iPhone・Android・パソコンのブラウザで使えて、インストール不要・無料です。</p>
+  <p>キーワード検索、日付を指定してジャンプ、長いやりとりを1枚の画像にするスクショ機能、名前を隠す機能があります。読み込んだトークの中身は端末の中だけで処理され、サーバーに送信・保存されることはありません。</p>
+</section>
 <div class="app" id="app">
   <header class="bar">
     <div class="who"><h1 id="ttl">トーク</h1><p id="meta"></p></div>
@@ -502,7 +530,8 @@ window.addEventListener('dragover', e => e.preventDefault());
 window.addEventListener('drop', e => { e.preventDefault(); dragN = 0; $('#drop').hidden = true; const f = e.dataTransfer.files[0]; if (f) readFile(f); });
 
 // ---- screenshot ----
-const BRAND = 'トクログ';
+const BRAND = 'ふきだしtxt';
+const TAGLINE = '昔のLINEのトーク履歴を今のLINEのように見返せる';
 const MAXSEL = 150;
 let sel = { on: false, a: null, b: null }, shotBlob = null, shotUrl = '';
 function startSel(){
@@ -636,9 +665,13 @@ function makeShot(){
     const tw = x.measureText(msg.time).width;
     x.fillText(msg.time, mine ? bx - 6 - tw : bx + b.bw + 6, by + b.bh - 8);
   }
-  x.font = cf(11, 700); const label = BRAND; const lw = x.measureText(label).width + 20;
-  x.globalAlpha = .55; x.fillStyle = '#ffffff'; rr(x, W - P - lw, H - 30, lw, 20, 10); x.fill();
-  x.globalAlpha = .85; x.fillStyle = IMGC.time; x.fillText(label, W - P - lw + 10, H - 20); x.globalAlpha = 1;
+  x.font = cf(11, 700); const bw0 = x.measureText(BRAND).width;
+  x.font = cf(9.5); const tw0 = x.measureText(TAGLINE).width;
+  const lw = bw0 + 8 + tw0 + 20;
+  x.globalAlpha = .6; x.fillStyle = '#ffffff'; rr(x, W - P - lw, H - 30, lw, 20, 10); x.fill();
+  x.globalAlpha = .9; x.fillStyle = IMGC.time;
+  x.font = cf(11, 700); x.fillText(BRAND, W - P - lw + 10, H - 20);
+  x.font = cf(9.5); x.fillText(TAGLINE, W - P - lw + 10 + bw0 + 8, H - 20); x.globalAlpha = 1;
   c.toBlob(blob => {
     if (!blob) { toast('画像を作れませんでした。範囲を短くしてもう一度試してください。'); return; }
     if (shotUrl) URL.revokeObjectURL(shotUrl);

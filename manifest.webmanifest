@@ -1,6 +1,6 @@
 {
-  "name": "トクログ",
-  "short_name": "トクログ",
+  "name": "ふきだしtxt",
+  "short_name": "ふきだしtxt",
   "description": "テキストで出力した昔のLINEのトーク履歴を、今のLINEのように見返せるビューア。中身は端末の外に送信されません。",
   "lang": "ja",
   "start_url": "./",
