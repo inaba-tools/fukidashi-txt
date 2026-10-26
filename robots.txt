@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pipopa-lab.github.io/fukidashi-txt/sitemap.xml
+Sitemap: https://inaba-tools.github.io/fukidashi-txt/sitemap.xml
